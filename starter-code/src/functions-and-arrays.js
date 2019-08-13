@@ -18,14 +18,20 @@ var words = [
   "crackpot"
 ];
 function findLongestWord(array) {
+  if (array.length === 0) {
+    return null;
+  }
   let longest = "";
-  for (let i = 0; i < words.length; i++) {
-    if (words[i].length > longest.length) {
-      longest = words[i];
-    }
+  for (let words of array) {
+    if (longest.length < words.length) longest = words;
   }
   return longest;
 }
+
+/* for (let i = 0; i < words.length; i++) {
+    if (words[i].length > longest.length) {
+      longest = words[i];
+    }*/
 
 console.log(findLongestWord(words));
 
@@ -33,15 +39,31 @@ console.log(findLongestWord(words));
 
 var numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
-const sumArray = (accumulator, currentValue) => accumulator + currentValue;
-console.log(numbers.reduce(sumArray));
+const sumArray = array => {
+  if (array.length === 0) {
+    return 0;
+  }
+  let currentResult = 0;
+  for (let numbers of array) {
+    currentResult += numbers;
+  }
+  return currentResult;
+};
+
 // Calculate the Average
 
 var numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 
-const averageNumbers = (accumulator, currentValue) =>
-  accumulator + currentValue;
+/*  const averageNumbers = (array) =>
+ accumulator + currentValue;
 console.log(numbersAvg.reduce(averageNumbers) / numbers.length);
+ */
+
+const averageNumbers = array => {
+  if (array.length === 0) return null;
+  return array.reduce((acc, cur) => acc + cur, 0) / array.length;
+};
+
 // Array of Strings
 var wordsArr = [
   "seat",
@@ -56,16 +78,15 @@ var wordsArr = [
   "palace"
 ];
 
-function averageWordLength(array) {
-  let emptyArray = [];
-  for (let i = 0; i < array; i++) {
-    emptyArray.push(array[i].length);
+const averageWordLength = array => {
+  if (array.length === 0) return null;
+
+  let currentValue = 0;
+  for (let words of array) {
+    currentValue += words.length;
   }
-  const averageNumbers = (accumulator, currentValue) =>
-    accumulator + currentValue;
-  return numbersAvg.reduce(averageNumbers) / numbers.length;
-}
-console.log(averageWordLength(wordsArr));
+  return currentValue / array.length;
+};
 
 // Unique Arrays
 var wordsUnique = [
@@ -105,6 +126,11 @@ var wordsFind = [
   "disobedience"
 ];
 
+const doesWordExist = (array, word) => {
+  if (array.length === 0) return false;
+  return array.includes(word);
+};
+
 // Counting Repetion
 var wordsCount = [
   "machine",
@@ -119,6 +145,16 @@ var wordsCount = [
   "disobedience",
   "matter"
 ];
+
+const howManyTimes = (array, word) => {
+  if (array.length === 0) return false;
+  let currentValue = 0;
+  for (let words of array) {
+    if (word === words) currentValue++;
+  }
+  return currentValue;
+};
+
 // Bonus Quest
 
 var matrix = [
@@ -416,3 +452,5 @@ var matrix = [
   ],
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
+
+// let greatestProduct;
